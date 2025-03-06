@@ -23,6 +23,7 @@ const LoginForm = ({setIsLogin}:LoginFormProps) => {
   
   const onLogin = (data:any) =>{
     console.log("Login :>>>>>>>>>", data);
+    handleLogin && handleLogin(data)
   }
 
   return <>

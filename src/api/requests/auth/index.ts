@@ -1,6 +1,7 @@
 import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, USERS_ENDPONT } from "@/api/endpoints";
 import { apiHttpClient } from "@/api/http-client";
 import { PostLogin } from "@/models/auth";
+import { PostUser, UpdateUser } from "@/models/user";
 import { GetUserApiResponse, LoginApiResponse, LogoutApiResponse } from "@/types/auth";
 
 export const loginApi = async (data: PostLogin) =>{
@@ -23,7 +24,7 @@ export const logoutApi = async () =>{
     }
 }
 
-export const createUserApi = async (data: FormData) =>{
+export const createUserApi = async (data: PostUser) =>{
     try{
         const response = await apiHttpClient.post<GetUserApiResponse>(USERS_ENDPONT, data, {});
         return response;
@@ -33,7 +34,7 @@ export const createUserApi = async (data: FormData) =>{
     }
 }
 
-export const updateUserApi = async (data: FormData) =>{
+export const updateUserApi = async (data: UpdateUser) =>{
     try{
         const response = await apiHttpClient.put<GetUserApiResponse>(USERS_ENDPONT, data, {});
         return response;

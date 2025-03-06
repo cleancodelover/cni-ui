@@ -23,8 +23,9 @@ const RegisterForm = ({ setIsLogin }:RegisterFormProps) => {
 
         const { loading, handleSignUp } = useSignup();
   
-  const onRegister = (data:any) =>{
+  const onRegister = (data:PostUser) =>{
     console.log("Login :>>>>>>>>>", data);
+    handleSignUp && handleSignUp(data)
   }
 
   return <>
