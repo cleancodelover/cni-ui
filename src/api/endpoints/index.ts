@@ -1,0 +1,5 @@
+export const REGISTER = "/register"
+export const LOGIN_ENDPOINT = "/login"
+export const LOGOUT_ENDPOINT = "/logout"
+export const ORGANIZATIONS = "/admin/organizations"
+export const USERS_ENDPONT = "/users"
