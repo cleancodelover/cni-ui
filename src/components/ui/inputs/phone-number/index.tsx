@@ -66,7 +66,7 @@ const PhoneNumberInputComponent = ({
               value={value}
               placeholder={placeholder}
               onChange={onChange}
-              className={`font-semiBold placeholder-[#98A2B3] placeholder:font-[400] bg-[#FFFFFF1A] [&>input]:bg-transparent [&>input]:ring-0 [&>input]:outline-none rounded-lg border-[1px] ${
+              className={`font-semiBold placeholder-[#98A2B3] placeholder:font-[400] bg-[#FFFFFF1A] [&>input]:bg-transparent [&>input]:ring-0 [&>input]:outline-none rounded-lg ${
                 error
                   ? " border-red-500 bg-red-50 text-sm text-red-900 placeholder-red-700 focus:ring-red-500 bg-[#FFFFFF1A] text-sm text-red-500 placeholder-red-500 focus:border-blue-500"
                   : `${

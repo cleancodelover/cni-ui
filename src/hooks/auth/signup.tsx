@@ -15,7 +15,7 @@ export const useSignup = (onSuccess?: HookOnSuccessType, onError?: HookOnErrorTy
         },
         onError(error:any, variables, context) {
             onError && onError();
-            const errMsg = error?.response?.data?.message
+            const errMsg =Object.values(error?.response?.data?.data).map((arr:any) => arr.join(', ')).join(', ')
             showToast({message: errMsg, type:'error'})
         },
     });

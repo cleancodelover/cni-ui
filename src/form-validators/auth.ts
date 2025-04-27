@@ -13,7 +13,10 @@ export const iLoginFormValidation = yup.object().shape({
 
 export const iSignUpFormValidation = yup.object().shape({
   full_name: yup.string().required('Full name is required'),
-  org_id: yup.number().required('Organization ID is required').integer('Organization ID must be an integer'),
+  org_id: yup.object({
+    label: yup.string().required(),
+    value: yup.string().required(),
+  }).nullable().required('Select a organization'),
   phone_number: yup.string().required('Phone number is required'),
   email: yup.string().email('Invalid email format').required('Email is required'),
   password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),

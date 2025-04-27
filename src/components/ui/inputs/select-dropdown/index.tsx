@@ -26,6 +26,7 @@ interface componentProps {
   onInputValueChange?: (value: string) => void;
   multiple?: boolean;
   disabled?: boolean;
+  setValue?: any;
   onFocus?: () => void;
   onBlur?: () => void;
 }
@@ -34,6 +35,7 @@ const DropDownSelectComponent = ({
   options,
   placeholder,
   defaultValue,
+  setValue,
   name,
   control,
   error,
@@ -57,23 +59,6 @@ const DropDownSelectComponent = ({
     }
   }, []);
 
-  const CustomMenu = (props: MenuProps) => {
-    return (
-      <components.Menu {...props}>
-        <div
-          className="bg-darkThemePrimary"
-          style={{
-            border: "2px solid black",
-            borderRadius: "5px",
-            padding: "10px",
-          }}
-        >
-          {props.children}
-        </div>
-      </components.Menu>
-    );
-  };
-
   return (
     <NonSSRWrapper>
     <Controller
@@ -86,7 +71,7 @@ const DropDownSelectComponent = ({
             <div className={``}>
               <h2
                 className={`mb-1 block font-medium ${
-                  error ? "text-red-900" : "text-gray-400"
+                  error ? "text-red-900" : "text-gray-50"
                 } `}
               >
                 {label}
@@ -100,7 +85,12 @@ const DropDownSelectComponent = ({
             defaultValue={defaultValue}
             placeholder={placeholder}
             value={value}
-            onChange={onChange}
+            onChange={(val)=>{
+              onChange(val);
+              if (setValue) {
+                setValue(name, val);
+              }
+            }}
             onInputChange={onInputValueChange}
             isLoading={loading}
             isClearable
@@ -112,6 +102,7 @@ const DropDownSelectComponent = ({
             onBlur={onBlur}
             styles={{
               placeholder: base =>({ ...base, color: '#98A2B3'}),
+              input: base =>({...base, color: '#FFFFFF1A'}),
               menuPortal: base => ({
                 ...base,
                 zIndex: 9999,

@@ -2,7 +2,7 @@ import { GetOrganization } from "./organization"
 
 export type PostUser = {
     full_name: string
-    org_id: number
+    org_id: any
     phone_number: string
     email: string
     password: string

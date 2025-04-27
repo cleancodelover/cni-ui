@@ -1,6 +1,7 @@
 'use client'
 import { LoginApiResponse } from '@/types/auth';
 import { removeFromSecureStore, saveToSecureStore, secureKeys } from '@/utils/secure-store';
+import { setCookie } from 'cookies-next';
 import React, { createContext, useContext, useState } from 'react';
 //#endregion
 
@@ -23,7 +24,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         console.log("auth :>>>>>>>>>>>>>>>", auth);
         if(auth?.data){
             setAuthUser(auth?.data?.token);
-            await saveToSecureStore(secureKeys.tokenKey, auth.data?.token);
+            await setCookie(secureKeys.tokenKey, auth.data?.token);
         }
     }
 

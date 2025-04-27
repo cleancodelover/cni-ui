@@ -1,4 +1,4 @@
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, USERS_ENDPONT } from "@/api/endpoints";
+import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, REGISTER, USERS_ENDPONT } from "@/api/endpoints";
 import { apiHttpClient } from "@/api/http-client";
 import { PostLogin } from "@/models/auth";
 import { PostUser, UpdateUser } from "@/models/user";
@@ -26,7 +26,9 @@ export const logoutApi = async () =>{
 
 export const createUserApi = async (data: PostUser) =>{
     try{
-        const response = await apiHttpClient.post<GetUserApiResponse>(USERS_ENDPONT, data, {});
+        console.log("Response :>>>>>>>>>>>>", data)
+        const response = await apiHttpClient.post<GetUserApiResponse>(REGISTER, data, {});
+        console.log("Response :>>>>>>>>>>>>", response)
         return response;
     }catch(error){
         console.log("Error :>>>>>>>>>>>>>>>", error)

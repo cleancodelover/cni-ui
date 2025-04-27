@@ -7,9 +7,11 @@ export const getOrganizationsApi = async () =>{
     const endpoint = generateParamsWithUrl(ORGANIZATIONS);
     try {
         const response = await apiHttpClient.get<GetOrganizationsApiResponse>(endpoint);
+        console.log("response :>>>>>>>>", response)
         return response;
-    } catch (error) {
+    } catch (error:any) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
+
     }
 }

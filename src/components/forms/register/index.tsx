@@ -10,6 +10,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { iSignUpFormValidation } from '@/form-validators/auth';
 import { useSignup } from '@/hooks/auth/signup';
+import { useGetOrganizations } from '@/hooks/organizations';
+import { useRouter } from 'next/navigation';
 //#endregion
 
 type RegisterFormProps = {
@@ -17,15 +19,28 @@ type RegisterFormProps = {
 }
 
 const RegisterForm = ({ setIsLogin }:RegisterFormProps) => {
-    const {control, handleSubmit, formState:{ errors} } = useForm<PostUser>({
+    const {control, handleSubmit, setValue, formState:{ errors} } = useForm<PostUser>({
           resolver: yupResolver(iSignUpFormValidation),
         });
 
-        const { loading, handleSignUp } = useSignup();
-  
+        const router = useRouter();
+
+        const { loading, handleSignUp } = useSignup(()=>{
+          console.log("Here :>>>>>>>>>>")
+          router.replace('survey')
+        });
+
+        const { organizations } = useGetOrganizations();
+
   const onRegister = (data:PostUser) =>{
-    console.log("Login :>>>>>>>>>", data);
-    handleSignUp && handleSignUp(data)
+    handleSignUp && handleSignUp({
+      full_name: data.full_name,
+      org_id: Number(data.org_id?.value),
+      phone_number: data.phone_number,
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation
+    })
   }
 
   return <>
@@ -50,8 +65,10 @@ const RegisterForm = ({ setIsLogin }:RegisterFormProps) => {
           label="Organization"
           control={control}
           name="org_id"
-          options={[{ label: `item 1`, value: `1`}, { label: `item 2`, value: `2`}]}
-          error={errors.org_id?.message}
+          setValue={setValue}
+          options={organizations?.map((item)=>{ return { value: item.id.toString(), label: item.name }})}
+          // options={[{ label: `item 1`, value: `1`}, { label: `item 2`, value: `2`}]}
+          error={errors.org_id?.message?.toString()}
         />
             <PrimaryTextInputComponent
             type="text"
@@ -64,7 +81,7 @@ const RegisterForm = ({ setIsLogin }:RegisterFormProps) => {
 
         <PhoneNumberInputComponent
           control={control}
-          name="phoneNumber"
+          name="phone_number"
           label="Phone number"
           placeholder="Enter phone number"
           type=""

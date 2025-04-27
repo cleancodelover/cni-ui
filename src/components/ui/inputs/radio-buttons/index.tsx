@@ -35,8 +35,8 @@ const RadioButtonsSelectComponent = ({
       {label && (
         <div className={``}>
           <p
-            className={`mb-1 block text-xs font-medium ${
-              error ? "text-red-900" : "text-gray-900"
+            className={`text-xl font-normal mb-4 text-gray-50 ${
+              error ? "text-red-900" : "text-blue-500"
             } `}
           >
             {label}
@@ -44,7 +44,7 @@ const RadioButtonsSelectComponent = ({
         </div>
       )}
 
-      <div className="flex gap-x-4 w-full">
+      <div className="flex gap-4 gap-x-4 w-full">
         {options.map((option, index) => (
           <Controller
             key={`${option}${index}`}
@@ -53,8 +53,8 @@ const RadioButtonsSelectComponent = ({
             render={({field}) => (
               <label
                 className={`${
-                  error ? "border-red-500 bg-red-50" : "border-gray-200"
-                } flex flex-1 items-center ps-4 border  h-[44px] rounded-lg`}
+                  error ? "border-red-500 bg-red-50" : "border-gray-700"
+                } flex flex-1 items-center bg-gray-700 p-4 hover:bg-gray-600 cursor-pointer  h-[44px] rounded-lg`}
               >
                 <input
                   {...field}
@@ -62,18 +62,18 @@ const RadioButtonsSelectComponent = ({
                   type="radio"
                   value={option}
                   className={`${
-                    error ? "border-red-500" : "bg-gray-100 border-gray-300"
-                  } w-4 h-4 text-blue-600 `}
+                    error ? "border-red-500" : "bg-gray-100 border-gray-700"
+                  } w-4 h-4 text-blue-500 `}
                 />
 
-                <p
+                <span
                   // htmlFor={option}
-                  className={`w-full py-4 ms-2 text-xs font-medium ${
-                    error ? "text-red-700" : "text-gray-900 "
+                  className={`w-full py-4 ms-2 text-xs font-semibold ${
+                    error ? "text-red-700" : "text-gray-300 "
                   }`}
                 >
                   {option}
-                </p>
+                </span>
               </label>
             )}
           />
