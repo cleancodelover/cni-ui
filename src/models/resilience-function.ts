@@ -27,23 +27,65 @@ export type GetQuestionOption = {
     options: GetQuestionOption[];
   }
   
-  export type GetResilienceControl = {
+  // export type GetResilienceControl = {
+  //   id: number;
+  //   name: string;
+  //   r_function_category: string;
+  //   questions: GetQuestion[];
+  // }
+  
+  // export type GetResilienceCategory = {
+  //   id: number;
+  //   name: string;
+  //   r_function: string;
+  //   r_controls: GetResilienceControl[];
+  // }
+  
+  // export type GetResilienceFunction = {
+  //   id: number;
+  //   name: string;
+  //   r_temporal_dimension: string;
+  //   r_category: GetResilienceCategory[];
+  // }
+
+  export interface GetResilienceFunctionQuestionOption {
+    id: number;
+    name: string;
+    r_measure: string;
+    weight: number;
+    order: number;
+  }
+  
+  export interface ResilienceFunctionQuestion {
+    id: number;
+    name: string;
+    r_control: string;
+    order: number;
+    options: GetResilienceFunctionQuestionOption[];
+    selectedOption?: number | null;
+  }
+  
+  export interface GetResilienceControl {
     id: number;
     name: string;
     r_function_category: string;
-    questions: GetQuestion[];
+    questions: ResilienceFunctionQuestion[];
   }
   
-  export type GetResilienceCategory = {
+  export interface GetResilienceFunctionCategory {
     id: number;
     name: string;
     r_function: string;
     r_controls: GetResilienceControl[];
   }
   
-  export type GetResilienceFunction = {
+  export interface GetResilienceFunction {
     id: number;
     name: string;
     r_temporal_dimension: string;
-    r_category: GetResilienceCategory[];
+    r_category?: GetResilienceFunctionCategory[];
   }
+
+  export type FormValues = {
+    [key: string]: number; // questionId: optionId
+  };

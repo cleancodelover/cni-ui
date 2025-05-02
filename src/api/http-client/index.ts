@@ -20,8 +20,9 @@ apiHttpClient.interceptors.request.use(
     }
     const token = getCookie(secureKeys.tokenKey);
     console.log("token :>>>>>>>>>>>>>>", token);
-    // const currentRoute = await getFromSecureStore(secureKeys.currentRoute);
-    config.headers.Authorization = `Bearer ${token}`;
+    if(token){
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     
     // if (token || unprotectedRoutes.includes(currentRoute)) {
     //   config.headers.Authorization = `Bearer ${token}`;
@@ -45,7 +46,6 @@ export const tempHttpClient = axios.create({
 
 tempHttpClient.interceptors.request.use(async config => {
   const token = getCookie(secureKeys.tokenKey);
-
   config.headers["Authorization"] = `Bearer ${token}`;
 
   return config;
