@@ -1,14 +1,10 @@
 'use client';
 import { useAuthentication } from '@/context/authContext';
 import { useGetUserSurveyResponse } from '@/hooks/survey-response';
-import { GetProfile } from '@/models/user';
-import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const SurveyDashboard = () => {
   const { authUser, signOut } = useAuthentication(); 
-  const [userData, setUserData] = useState<GetProfile | undefined>(authUser);
-
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -16,11 +12,7 @@ const SurveyDashboard = () => {
     confirmPassword: ''
   });
   const [isScrolled, setIsScrolled] = useState(false);
-  // const { authUser } = useAuthentication();
-  const router = useRouter();
-
   const { surveyData } = useGetUserSurveyResponse();
-
 
   const handleLogout = () => {
     signOut && signOut();
@@ -107,11 +99,11 @@ const SurveyDashboard = () => {
               {isScrolled && (
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600 hidden sm:inline">
-                    {userData?.full_name}
+                    {authUser?.full_name}
                   </span>
                   <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <span className="text-sm font-medium text-blue-800">
-                      {userData?.full_name?.charAt(0)}
+                      {authUser?.full_name?.charAt(0)}
                     </span>
                   </div>
                 </div>
@@ -131,17 +123,17 @@ const SurveyDashboard = () => {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm font-medium text-gray-500">Name</p>
-                  <p className="mt-1 text-sm text-gray-900">{userData?.full_name}</p>
+                  <p className="mt-1 text-sm text-gray-900">{authUser?.full_name}({authUser?.organisation})</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500">Email</p>
-                  <p className="mt-1 text-sm text-gray-900">{userData?.email}</p>
+                  <p className="mt-1 text-sm text-gray-900">{authUser?.email}</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500">Phone Number</p>
                   
                     <div className="flex justify-between items-center">
-                      <p className="mt-1 text-sm text-gray-900">{userData?.phone_number}</p>
+                      <p className="mt-1 text-sm text-gray-900">{authUser?.phone_number}</p>
                       
                     </div>
                 </div>
