@@ -1,4 +1,4 @@
-import { RESILIENCE_FUNCTION_ENDPONT, RESILIENCE_FUNCTION_QUESTIONS_ENDPONT, STORE_RESILIENCE_FUNCTION_ANSWERS_ENDPONT } from "@/api/endpoints";
+import { RESILIENCE_FUNCTION_ENDPONT, RESILIENCE_FUNCTION_QUESTIONS_ENDPONT, STORE_RESILIENCE_FUNCTION_ANSWERS_ENDPONT, USER_SURVEY_RESPONSE_ENDPONT } from "@/api/endpoints";
 import { apiHttpClient } from "@/api/http-client";
 import { FormValues } from "@/models/resilience-function";
 import { GetResilienceFunctionQuestionsApiResponse, GetResilienceFunctionsApiResponse, GetSurveyResponsApiResponse } from "@/types/resilience-functions";
@@ -44,9 +44,9 @@ export const submitResponseApi = async (data: FormValues) =>{
 }
 
 export const getUserSurveyResponseApi = async () =>{
-    const endpoint = generateParamsWithUrl(RESILIENCE_FUNCTION_ENDPONT);
+    const endpoint = generateParamsWithUrl(USER_SURVEY_RESPONSE_ENDPONT);
     try {
-        const response = await apiHttpClient.get<GetResilienceFunctionsApiResponse>(endpoint);
+        const response = await apiHttpClient.get<GetSurveyResponsApiResponse>(endpoint);
         console.log("response :>>>>>>>>", response)
         return response;
     } catch (error:any) {

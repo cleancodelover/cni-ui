@@ -82,8 +82,10 @@ function Survey({ resilienceFunctions, onSubmit, isLoading }: SurveyProps) {
   const submitForm = async (data: FormValues) => {
     try {
       // Filter out unanswered questions (-1 values)
-      const answers = Object.fromEntries(
-        Object.entries(data).filter(([_, value]) => value !== -1)
+      const answers:Record<string, string>  = Object.fromEntries(
+        Object.entries(data)
+          .filter(([_, value]) => value !== null)
+          .map(([key, value]) => [key, String(value)]) // Keys are already coerced to strings
       );
       console.log("Submitting answers:", answers);
       onSubmit(answers);

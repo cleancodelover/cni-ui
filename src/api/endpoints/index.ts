@@ -3,6 +3,7 @@ export const LOGIN_ENDPOINT = "/api/login"
 export const LOGOUT_ENDPOINT = "/logout"
 export const ORGANIZATIONS = "/api/v1/admin/organisation"
 export const USERS_ENDPONT = "/users"
+export const USER_PROFILE_ENDPONT = "/api/v1/user/profile"
 export const SECTORS = "/v1/api/admin/sector"
 export const ADMIN_USERS_ENDPONT = "/api/v1/admin/users"
 export const REPORT_IDENTITY_ENDPONT = "/api/v1/admin/report/identity"
@@ -17,3 +18,5 @@ export const RESILIENCE_FUNCTION_CATEGORY_ENDPONT = "/api/v1/admin/resilienceFun
 export const RESILIENCE_FUNCTION_CATEGORY_BY_RESILIENCE_FUNCTION_ID_ENDPONT = "/api/v1/admin/resilienceFunctionCategoryByRf"
 export const RESILIENCE_FUNCTION_QUESTIONS_ENDPONT = "/api/v1/user/survey"
 export const STORE_RESILIENCE_FUNCTION_ANSWERS_ENDPONT = "/api/v1/user/survey/storeResponse"
+export const USER_SURVEY_RESPONSE_ENDPONT = "/api/v1/user/cniirIndex/show"
+

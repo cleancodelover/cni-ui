@@ -26,9 +26,7 @@ const LoginForm = ({ setIsLogin }: LoginFormProps) => {
 
   const router = useRouter();
 
-  const { loading, handleLogin } = useLogin(()=>{
-    router.push('/survey')
-  });
+  const { loading, handleLogin } = useLogin();
 
   const onLogin = (data: any) => {
     handleLogin && handleLogin(data);

@@ -1,7 +1,10 @@
 'use client'
+import { getUserProfileApi } from '@/api/requests/auth';
+import { GetProfile } from '@/models/user';
 import { LoginApiResponse } from '@/types/auth';
-import { removeFromSecureStore, saveToSecureStore, secureKeys } from '@/utils/secure-store';
-import { setCookie } from 'cookies-next';
+import { secureKeys } from '@/utils/secure-store';
+import { setCookie, deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 import React, { createContext, useContext, useState } from 'react';
 //#endregion
 
@@ -10,7 +13,7 @@ type AuthProviderProps = {
 }
 
 type AuthContextProps = {
-    authUser?: string,
+    authUser?: GetProfile,
     session?:any,
     signIn?:(auth: LoginApiResponse)=>void,
     signOut?:()=>void
@@ -18,19 +21,32 @@ type AuthContextProps = {
 
 export const AuthContext = createContext<AuthContextProps>({});
 const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [authUser, setAuthUser] = useState<string>();
+    const [authUser, setAuthUser] = useState<GetProfile>();
+    const router = useRouter();
 
     const signIn = async (auth: LoginApiResponse) =>{
-        console.log("auth :>>>>>>>>>>>>>>>", auth);
         if(auth?.data){
-            setAuthUser(auth?.data?.token);
+            // setAuthUser(auth?.data?.token);
             await setCookie(secureKeys.tokenKey, auth.data?.token);
+            const response = await getUserProfileApi();
+            const profile = response?.data?.data as GetProfile;
+            console.log("profile :>>>>>>>>", profile)
+            if(profile){
+                setAuthUser(profile);
+                if(profile.survey_count <= 0 || profile.is_survey_ongoing){
+                    router.replace("/survey");
+                }
+                if(profile.survey_count > 0){
+                    router.replace("/dashboard");
+                }
+            }
         }
     }
 
     const signOut = async()=>{
-        await removeFromSecureStore(secureKeys.tokenKey);
+        await deleteCookie(secureKeys.tokenKey);
         setAuthUser(undefined);
+        router.replace("/");
     }
    
     return <AuthContext.Provider value={{

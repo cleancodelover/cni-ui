@@ -1,28 +1,14 @@
 'use client';
+import { useAuthentication } from '@/context/authContext';
+import { useGetUserSurveyResponse } from '@/hooks/survey-response';
+import { GetProfile } from '@/models/user';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const SurveyDashboard = () => {
-  // Sample data from API response
-  const surveyData = {
-    id: 25,
-    organisation: "NSUK",
-    quadrant: "Q1",
-    cniir_score: "0.21",
-    pre_event_rtd_score: "0.17",
-    during_event_rtd_score: "0.12",
-    post_event_rtd_score: "0.19",
-    date_calculated: "2023-04-19T06:47:48.000000Z"
-  };
+  const { authUser, signOut } = useAuthentication(); 
+  const [userData, setUserData] = useState<GetProfile | undefined>(authUser);
 
-  // User data (would typically come from auth context or API)
-  const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+234 812 345 6789"
-  });
-
-  const [isEditingPhone, setIsEditingPhone] = useState(false);
-  const [newPhone, setNewPhone] = useState(userData.phone);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -30,12 +16,14 @@ const SurveyDashboard = () => {
     confirmPassword: ''
   });
   const [isScrolled, setIsScrolled] = useState(false);
+  // const { authUser } = useAuthentication();
+  const router = useRouter();
+
+  const { surveyData } = useGetUserSurveyResponse();
+
 
   const handleLogout = () => {
-    // Add your logout logic here
-    console.log('User logged out');
-    // Typically would redirect to login page
-    // router.push('/login');
+    signOut && signOut();
   };
   
   useEffect(() => {
@@ -45,11 +33,6 @@ const SurveyDashboard = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handlePhoneUpdate = () => {
-    setUserData({...userData, phone: newPhone});
-    setIsEditingPhone(false);
-  };
 
   const handlePasswordChange = () => {
     // Add password validation and API call here
@@ -124,11 +107,11 @@ const SurveyDashboard = () => {
               {isScrolled && (
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600 hidden sm:inline">
-                    {userData.name}
+                    {userData?.full_name}
                   </span>
                   <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <span className="text-sm font-medium text-blue-800">
-                      {userData.name.charAt(0)}
+                      {userData?.full_name?.charAt(0)}
                     </span>
                   </div>
                 </div>
@@ -148,40 +131,19 @@ const SurveyDashboard = () => {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm font-medium text-gray-500">Name</p>
-                  <p className="mt-1 text-sm text-gray-900">{userData.name}</p>
+                  <p className="mt-1 text-sm text-gray-900">{userData?.full_name}</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500">Email</p>
-                  <p className="mt-1 text-sm text-gray-900">{userData.email}</p>
+                  <p className="mt-1 text-sm text-gray-900">{userData?.email}</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500">Phone Number</p>
-                  {isEditingPhone ? (
-                    <div className="mt-1 flex">
-                      <input
-                        type="tel"
-                        value={newPhone}
-                        onChange={(e) => setNewPhone(e.target.value)}
-                        className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      />
-                      <button
-                        onClick={handlePhoneUpdate}
-                        className="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  ) : (
+                  
                     <div className="flex justify-between items-center">
-                      <p className="mt-1 text-sm text-gray-900">{userData.phone}</p>
-                      <button
-                        onClick={() => setIsEditingPhone(true)}
-                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                      >
-                        Edit
-                      </button>
+                      <p className="mt-1 text-sm text-gray-900">{userData?.phone_number}</p>
+                      
                     </div>
-                  )}
                 </div>
                 
                 {/* Password Change Section */}

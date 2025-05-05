@@ -12,7 +12,7 @@ function SurveyPage() {
     router.replace('/dashboard');
   });
   
-  const onSubmit = async (answers: Record<number, number>) => {
+  const onSubmit = async (answers: Record<string, string>) => {
     try {
       handleSurveySubmit(answers)
     } catch (error) {

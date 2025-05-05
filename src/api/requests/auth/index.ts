@@ -1,8 +1,8 @@
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, REGISTER, USERS_ENDPONT } from "@/api/endpoints";
+import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, REGISTER, USER_PROFILE_ENDPONT, USERS_ENDPONT } from "@/api/endpoints";
 import { apiHttpClient } from "@/api/http-client";
 import { PostLogin } from "@/models/auth";
 import { PostUser, UpdateUser } from "@/models/user";
-import { GetUserApiResponse, LoginApiResponse, LogoutApiResponse } from "@/types/auth";
+import { GetUserApiResponse, GetUserProfileApiResponse, LoginApiResponse, LogoutApiResponse } from "@/types/auth";
 
 export const loginApi = async (data: PostLogin) =>{
     try{
@@ -43,5 +43,17 @@ export const updateUserApi = async (data: UpdateUser) =>{
     } catch (error) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
+    }
+}
+
+
+export const getUserProfileApi = async () =>{
+    try {
+        const response = await apiHttpClient.get<GetUserProfileApiResponse>(USER_PROFILE_ENDPONT);
+        return response;
+    } catch (error:any) {
+        console.log("Error :>>>>>>>>>>>>", error)
+        throw error;
+
     }
 }

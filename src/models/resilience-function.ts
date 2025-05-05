@@ -87,5 +87,5 @@ export type GetQuestionOption = {
   }
 
   export type FormValues = {
-    [key: string]: number; // questionId: optionId
+    [key: string]: string; // questionId: optionId
   };

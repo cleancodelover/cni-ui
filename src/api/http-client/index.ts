@@ -33,7 +33,7 @@ apiHttpClient.interceptors.request.use(
     //   window.location.href = "/";
     // }
 
-    console.log("config :>>>>>>>>>>>>>>", config)
+    // console.log("config :>>>>>>>>>>>>>>", config)
     return config;
   },
   (error:any) => Promise.reject(error)
