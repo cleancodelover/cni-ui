@@ -10,7 +10,7 @@ const Onboarding = () => {
   
     return <div className="flex flex-col md:flex-row h-screen w-full p-5">
     {/* Left Side */}
-    <div className="md:w-1/2 w-full h-full md:h-full text-white flex flex-col items-center justify-center p-8 relative">
+    <div className="hidden md:flex md:w-1/2 w-full h-full md:h-full text-white flex-col items-center justify-center p-8 relative">
       <motion.div
       className="w-full h-full rounded-lg overflow-hidden sm:w-full tab:w-[215px] shadow-lg"
       initial={{opacity: 0, y: 30, scale: 0.95}}
