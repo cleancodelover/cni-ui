@@ -1,8 +1,8 @@
 "use client";
 
 import React, {useEffect, useState} from "react";
-import {Control, Controller} from "react-hook-form";
-import Select, {components, MenuProps} from "react-select";
+import {Controller} from "react-hook-form";
+import Select from "react-select";
 import NonSSRWrapper from "../../../../../NonSSRWrapper";
 // import NonSSRWrapper from '@/components/shared/non-ssr-wrapper'
 

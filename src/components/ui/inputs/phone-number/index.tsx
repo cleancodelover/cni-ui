@@ -1,7 +1,7 @@
 "use client";
 
 import {useState} from "react";
-import {Control, Controller} from "react-hook-form";
+import {Controller} from "react-hook-form";
 import PhoneInput, {Country} from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
@@ -11,7 +11,7 @@ interface componentProps {
   placeholder: string;
   error?: string;
   type: string;
-  control: Control<any>;
+  control: any;
   autoComplete?: string;
   allowDecimal?: boolean;
   disabled?: boolean;

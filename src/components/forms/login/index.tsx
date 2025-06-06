@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { iLoginFormValidation } from "@/form-validators/auth";
 import { useLogin } from "@/hooks/auth/login";
 import PulseLoader from "react-spinners/PulseLoader";
-import { useRouter } from "next/navigation";
 //#endregion
 
 type LoginFormProps = {
@@ -23,8 +22,6 @@ const LoginForm = ({ setIsLogin }: LoginFormProps) => {
   } = useForm<PostLogin>({
     resolver: yupResolver(iLoginFormValidation),
   });
-
-  const router = useRouter();
 
   const { loading, handleLogin } = useLogin();
 

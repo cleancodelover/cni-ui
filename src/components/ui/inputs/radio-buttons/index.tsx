@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import {Control, Controller} from "react-hook-form";
+import {Controller} from "react-hook-form";
 
 interface componentProps {
   options: string[] | [];
