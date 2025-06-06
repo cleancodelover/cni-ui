@@ -9,7 +9,7 @@ export const getOrganizationsApi = async () =>{
         const response = await apiHttpClient.get<GetOrganizationsApiResponse>(endpoint);
         console.log("response :>>>>>>>>", response)
         return response;
-    } catch (error:any) {
+    } catch (error) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
 

@@ -10,7 +10,7 @@ export const getResilienceFunctionsApi = async () =>{
         const response = await apiHttpClient.get<GetResilienceFunctionsApiResponse>(endpoint);
         console.log("response :>>>>>>>>", response)
         return response;
-    } catch (error:any) {
+    } catch (error) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
 
@@ -49,7 +49,7 @@ export const getUserSurveyResponseApi = async () =>{
         const response = await apiHttpClient.get<GetSurveyResponsApiResponse>(endpoint);
         console.log("response :>>>>>>>>", response)
         return response;
-    } catch (error:any) {
+    } catch (error) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
 

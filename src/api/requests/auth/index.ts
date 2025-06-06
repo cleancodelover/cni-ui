@@ -51,7 +51,7 @@ export const getUserProfileApi = async () =>{
     try {
         const response = await apiHttpClient.get<GetUserProfileApiResponse>(USER_PROFILE_ENDPONT);
         return response;
-    } catch (error:any) {
+    } catch (error) {
         console.log("Error :>>>>>>>>>>>>", error)
         throw error;
 

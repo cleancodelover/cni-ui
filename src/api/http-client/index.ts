@@ -12,7 +12,7 @@ export const apiHttpClient = axios.create({
 });
 
 apiHttpClient.interceptors.request.use(
-  async (config:any) => {
+  async (config) => {
     const currentPath = window.location.pathname;
 
     if (authPaths.includes(currentPath)) {
@@ -36,7 +36,7 @@ apiHttpClient.interceptors.request.use(
     // console.log("config :>>>>>>>>>>>>>>", config)
     return config;
   },
-  (error:any) => Promise.reject(error)
+  (error) => Promise.reject(error)
 );
 
 export const tempHttpClient = axios.create({
