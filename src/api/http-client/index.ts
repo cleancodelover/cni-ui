@@ -23,17 +23,6 @@ apiHttpClient.interceptors.request.use(
     if(token){
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
-    // if (token || unprotectedRoutes.includes(currentRoute)) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // } else {
-    //   localStorage.setItem(REVISIT_PATH, currentPath);
-    //   deleteCookie(TOKEN_COOKIE);
-    //   toast.error("Session expired, please log in");
-    //   window.location.href = "/";
-    // }
-
-    // console.log("config :>>>>>>>>>>>>>>", config)
     return config;
   },
   (error) => Promise.reject(error)
